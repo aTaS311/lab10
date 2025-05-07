@@ -1,0 +1,22 @@
+import math
+def f(x):
+    return x - math.tan(x)
+def df(x):
+    return 1 - (1 / math.cos(x)**2)
+def newton_method(x0, tol=1e-6, max_iter=100):
+    x = x0
+    for i in range(max_iter):
+        fx = f(x)
+        dfx = df(x)
+        if dfx == 0:
+            print("Törəmə 0-a bərabərdir. Yöntəm dayandırıldı.")
+            return None
+        x_new = x - fx / dfx
+        if abs(x_new - x) < tol:
+            print(f"Kök tapıldı: {x_new:.6f} (Iterasiya sayı: {i+1})")
+            return x_new
+        x = x_new
+    print("Maksimum iterasiya sayı aşdı.")
+    return x
+x0 = 1.0
+newton_method(x0)
